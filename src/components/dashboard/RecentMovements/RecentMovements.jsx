@@ -2,6 +2,7 @@ import { Car, Fuel } from "lucide-react";
 
 import styles from "./RecentMovements.module.css";
 import { formatCurrency } from "../../../utils/formatCurrency";
+import { formatDate } from "../../../utils/formatDate";
 
 
 function RecentMovements({ movements }) {
@@ -41,6 +42,9 @@ function RecentMovements({ movements }) {
 
                 <small>
                   {isTrip ? "Viaje" : "Gasto"}
+                </small>
+                <small>
+                  {formatDate(movement.date)}
                 </small>
                 <small>
                   {movement.date}
