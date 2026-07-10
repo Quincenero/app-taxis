@@ -1,9 +1,11 @@
 import { Car, Fuel } from "lucide-react";
 
 import styles from "./RecentMovements.module.css";
+import { formatCurrency } from "../../../utils/formatCurrency";
 
 
 function RecentMovements({ movements }) {
+  
   return (
     <section className={styles.container}>
 
@@ -15,7 +17,7 @@ function RecentMovements({ movements }) {
       <div className={styles.list}>
 
         {movements.map((movement) => {
-
+          console.log(movement.amount);
           const isTrip = movement.type === "trip";
 
           const Icon = isTrip ? Car : Fuel;
@@ -54,7 +56,9 @@ function RecentMovements({ movements }) {
                 }
               >
                 {isTrip ? "+" : "-"}
-                ${Math.abs(movement.amount)}
+                {formatCurrency(
+                  Math.abs(movement.amount)
+                )}
               </strong>
 
             </article>
