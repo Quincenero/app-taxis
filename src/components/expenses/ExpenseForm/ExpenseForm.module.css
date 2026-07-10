@@ -1,0 +1,50 @@
+.form {
+
+  background: var(--color-surface);
+
+  padding: 24px;
+
+  border-radius: var(--radius);
+
+  box-shadow: var(--shadow);
+
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 16px;
+
+}
+
+
+.form input,
+.form select {
+
+  padding: 12px;
+
+  border-radius: var(--radius);
+
+  border: 1px solid var(--color-border);
+
+  font-size: 15px;
+
+}
+
+
+.form button {
+
+  background: var(--color-danger);
+
+  color: white;
+
+  border: none;
+
+  padding: 14px;
+
+  border-radius: var(--radius);
+
+  cursor: pointer;
+
+  font-weight: 600;
+
+}

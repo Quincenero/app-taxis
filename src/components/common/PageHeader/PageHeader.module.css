@@ -1,0 +1,13 @@
+.header {
+  margin-bottom: 24px;
+}
+
+.header h1 {
+  font-size: 2rem;
+  color: var(--color-text-primary);
+}
+
+.header p {
+  margin-top: 6px;
+  color: var(--color-text-secondary);
+}

@@ -1,0 +1,30 @@
+:root {
+  /* Colores principales */
+  --color-primary: #2563eb;
+  --color-success: #16a34a;
+  --color-warning: #f59e0b;
+  --color-danger: #dc2626;
+
+  /* Fondos */
+  --color-background: #f8fafc;
+  --color-surface: #ffffff;
+
+  /* Textos */
+  --color-text-primary: #0f172a;
+  --color-text-secondary: #64748b;
+
+  /* Bordes */
+  --color-border: #e2e8f0;
+
+  /* Dimensiones */
+  --header-height: 64px;
+  --sidebar-width: 240px;
+  --bottom-nav-height: 64px;
+
+  /* Diseño */
+  --radius: 12px;
+
+  /* Sombras */
+  --shadow:
+    0 4px 12px rgba(15, 23, 42, 0.08);
+}
