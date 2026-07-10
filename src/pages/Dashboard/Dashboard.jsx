@@ -24,6 +24,8 @@ import {
 import { formatCurrency } from "../../utils/formatCurrency";
 import PageHeader from "../../components/common/PageHeader/PageHeader";
 
+import { getRecentMovements } from "../../utils/movements";
+
 function Dashboard() {
 
   const [trips] = useLocalStorage(
@@ -42,6 +44,11 @@ function Dashboard() {
   const expensesTotal = calculateExpenses(expenses);
 
   const balance = calculateBalance(
+    trips,
+    expenses
+  );
+
+  const movements = getRecentMovements(
     trips,
     expenses
   );
@@ -91,7 +98,9 @@ function Dashboard() {
 
       <QuickActions />
 
-      <RecentMovements />
+      <RecentMovements
+        movements={movements}
+      />
 
     </section>
   );

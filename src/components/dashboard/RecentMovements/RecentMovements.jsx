@@ -3,29 +3,7 @@ import { Car, Fuel } from "lucide-react";
 import styles from "./RecentMovements.module.css";
 
 
-const movements = [
-  {
-    id: 1,
-    type: "viaje",
-    description: "Viaje al centro",
-    amount: 2500,
-  },
-  {
-    id: 2,
-    type: "gasto",
-    description: "Carga de combustible",
-    amount: -8000,
-  },
-  {
-    id: 3,
-    type: "viaje",
-    description: "Viaje a terminal",
-    amount: 1800,
-  },
-];
-
-
-function RecentMovements() {
+function RecentMovements({ movements }) {
   return (
     <section className={styles.container}>
 
@@ -38,7 +16,7 @@ function RecentMovements() {
 
         {movements.map((movement) => {
 
-          const isTrip = movement.type === "viaje";
+          const isTrip = movement.type === "trip";
 
           const Icon = isTrip ? Car : Fuel;
 
@@ -56,11 +34,14 @@ function RecentMovements() {
 
               <div className={styles.info}>
                 <span>
-                  {movement.description}
+                  {movement.title}
                 </span>
 
                 <small>
                   {isTrip ? "Viaje" : "Gasto"}
+                </small>
+                <small>
+                  {movement.date}
                 </small>
               </div>
 
@@ -72,7 +53,7 @@ function RecentMovements() {
                     : styles.expense
                 }
               >
-                {isTrip ? "+" : ""}
+                {isTrip ? "+" : "-"}
                 ${Math.abs(movement.amount)}
               </strong>
 
