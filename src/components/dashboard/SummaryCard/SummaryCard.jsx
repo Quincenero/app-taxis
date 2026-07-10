@@ -5,7 +5,10 @@ function SummaryCard({ title, value, icon: Icon, color }) {
     <article className={styles.card}>
       <div
         className={styles.icon}
-        style={{ color }}
+        style={{
+          color,
+          backgroundColor: `${color}20`,
+        }}
       >
         <Icon size={28} />
       </div>
