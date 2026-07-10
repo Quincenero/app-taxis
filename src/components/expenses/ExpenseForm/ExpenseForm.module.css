@@ -1,4 +1,7 @@
 .form {
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
 
   background: var(--color-surface);
 
@@ -13,12 +16,14 @@
   flex-direction: column;
 
   gap: 16px;
-
 }
 
 
 .form input,
 .form select {
+
+  width: 100%;
+  box-sizing: border-box;
 
   padding: 12px;
 
@@ -33,6 +38,8 @@
 
 .form button {
 
+  width: 100%;
+
   background: var(--color-danger);
 
   color: white;
@@ -46,5 +53,14 @@
   cursor: pointer;
 
   font-weight: 600;
+
+}
+
+
+@media (max-width: 480px) {
+
+  .form {
+    padding: 16px;
+  }
 
 }

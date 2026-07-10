@@ -4,6 +4,7 @@ import { STORAGE_KEYS } from "../../constants/appConfig";
 import TripForm from "../../components/trips/TripForm/TripForm";
 import TripList from "../../components/trips/TripList/TripList";
 import PageHeader from "../../components/common/PageHeader/PageHeader";
+import styles from "../Page.module.css";
 
 function Viajes() {
 
@@ -23,7 +24,7 @@ function Viajes() {
 
 
   return (
-    <section>
+    <section className={styles.container}>
 
       <PageHeader
         title="Viajes"

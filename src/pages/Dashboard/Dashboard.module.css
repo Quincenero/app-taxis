@@ -4,23 +4,41 @@
   gap: 24px;
 }
 
+
 .title {
   font-size: 28px;
   font-weight: 700;
   color: var(--color-text-primary);
 }
 
+
 .cards {
   display: grid;
 
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(
+    auto-fit,
+    minmax(260px, 1fr)
+  );
 
   gap: 20px;
 }
 
 
 @media (max-width: 768px) {
+
+  .container {
+    gap: 18px;
+  }
+
+
+  .title {
+    font-size: 24px;
+  }
+
+
   .cards {
     grid-template-columns: 1fr;
+    gap: 16px;
   }
+
 }

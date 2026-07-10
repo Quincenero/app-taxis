@@ -8,6 +8,8 @@ import ExpenseList from "../../components/expenses/ExpenseList/ExpenseList";
 
 import PageHeader from "../../components/common/PageHeader/PageHeader";
 
+import styles from "../Page.module.css";
+
 function Gastos() {
 
   const [expenses, setExpenses] = useLocalStorage(
@@ -26,7 +28,7 @@ function Gastos() {
 
 
   return (
-    <section>
+    <section className={styles.container}>
 
       <PageHeader
         title="Gastos"

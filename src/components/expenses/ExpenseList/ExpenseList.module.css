@@ -1,5 +1,9 @@
 .container {
 
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+
   display: flex;
 
   flex-direction: column;
@@ -20,6 +24,8 @@
 
 .list {
 
+  width: 100%;
+
   display: flex;
 
   flex-direction: column;
@@ -36,5 +42,19 @@
   padding: 20px;
 
   text-align: center;
+
+}
+
+
+@media (max-width: 480px) {
+
+  .title {
+    font-size: 18px;
+  }
+
+
+  .empty {
+    padding: 16px;
+  }
 
 }
