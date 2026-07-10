@@ -88,3 +88,10 @@
 .expense {
   color: var(--color-danger);
 }
+
+.empty {
+  text-align: center;
+  color: #64748b;
+  padding: 20px;
+  font-size: 0.95rem;
+}

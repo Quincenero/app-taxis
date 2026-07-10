@@ -14,62 +14,82 @@ function RecentMovements({ movements }) {
         Últimos movimientos
       </h2>
 
-
       <div className={styles.list}>
 
-        {movements.map((movement) => {
-          console.log(movement.amount);
-          const isTrip = movement.type === "trip";
+        {movements.length === 0 ? (
 
-          const Icon = isTrip ? Car : Fuel;
+          <p className={styles.empty}>
+            Todavía no hay movimientos registrados
+          </p>
 
+        ) : (
 
-          return (
-            <article
-              key={movement.id}
-              className={styles.item}
-            >
+          movements.map((movement) => {
 
-              <div className={styles.icon}>
-                <Icon size={22} />
-              </div>
+            const isTrip = movement.type === "trip";
+
+            const Icon = isTrip ? Car : Fuel;
 
 
-              <div className={styles.info}>
-                <span>
-                  {movement.title}
-                </span>
+            return (
 
-                <small>
-                  {isTrip ? "Viaje" : "Gasto"}
-                </small>
-                <small>
-                  {formatDate(movement.date)}
-                </small>
-                <small>
-                  {movement.date}
-                </small>
-              </div>
-
-
-              <strong
-                className={
-                  isTrip
-                    ? styles.income
-                    : styles.expense
-                }
+              <article
+                key={movement.id}
+                className={styles.item}
               >
-                {isTrip ? "+" : "-"}
-                {formatCurrency(
-                  Math.abs(movement.amount)
-                )}
-              </strong>
 
-            </article>
-          );
-        })}
+                <div className={styles.icon}>
+                  <Icon size={22} />
+                </div>
+
+
+                <div className={styles.info}>
+
+                  <span>
+                    {movement.title}
+                  </span>
+
+
+                  <small>
+                    {isTrip ? "Viaje" : "Gasto"}
+                  </small>
+
+
+                  <small>
+                    {formatDate(movement.date)}
+                  </small>
+
+                </div>
+
+
+                <strong
+                  className={
+                    isTrip
+                      ? styles.income
+                      : styles.expense
+                  }
+                >
+
+                  {isTrip ? "+" : "-"}
+
+                  {formatCurrency(
+                    Math.abs(movement.amount)
+                  )}
+
+                </strong>
+
+
+              </article>
+
+            );
+
+          })
+
+        )}
 
       </div>
+
+      
 
     </section>
   );
