@@ -52,10 +52,26 @@ function Viajes() {
       }
 
   navigate("/");
-};
+  };
 
   const handleEdit = (trip) => {
   setEditingTrip(trip);
+  };
+
+  const handleDelete = (id) => {
+
+    const confirmDelete = window.confirm(
+      "¿Deseas eliminar este viaje?"
+    );
+
+    if (!confirmDelete) return;
+
+    setTrips(
+      trips.filter((trip) => trip.id !== id)
+    );
+
+    toast.success("🗑️ Viaje eliminado correctamente");
+
   };
 
   return (
@@ -75,6 +91,7 @@ function Viajes() {
       <TripList
         trips={trips}
         onEdit={handleEdit}
+        onDelete={handleDelete}
       />
 
     </section>

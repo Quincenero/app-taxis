@@ -64,7 +64,12 @@ function TripCard({
           ✏️ Editar
         </Button>
 
-        
+        <Button
+          variant="danger"
+          onClick={() => onDelete(trip.id)}
+        >
+          🗑️ Eliminar
+        </Button>
 
       </div>
 

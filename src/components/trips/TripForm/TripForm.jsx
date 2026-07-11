@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState, useMemo } from "react";
 import { PAYMENT_METHODS } from "../../../constants/paymentMethods";
 import Button from "../../common/Button/Button";
 import styles from "./TripForm.module.css";
@@ -13,15 +13,12 @@ const createEmptyForm = () => ({
 });
 
 function TripForm({ onSave, trip }) {
-  const [form, setForm] = useState(trip || createEmptyForm());
-
-  useEffect(() => {
-    setForm(trip || createEmptyForm());
-  }, [trip]);
+  // inicializamos con trip o formulario vacío
+  const initialForm = useMemo(() => trip || createEmptyForm(), [trip]);
+  const [form, setForm] = useState(initialForm);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-
     setForm({
       ...form,
       [name]: name === "amount" ? Math.floor(Number(value)) : value,
@@ -37,79 +34,27 @@ function TripForm({ onSave, trip }) {
     };
 
     onSave(tripData);
-
-    setForm(createEmptyForm());
+    setForm(createEmptyForm()); // reset después de guardar
   };
 
   return (
-    <form
-      className={styles.form}
-      onSubmit={handleSubmit}
-    >
-      <h2>
-        {trip ? "Editar viaje" : "Nuevo viaje"}
-      </h2>
+    <form className={styles.form} onSubmit={handleSubmit}>
+      <h2>{trip ? "Editar viaje" : "Nuevo viaje"}</h2>
 
-      <input
-        type="date"
-        name="date"
-        value={form.date}
-        onChange={handleChange}
-        required
-      />
+      <input type="date" name="date" value={form.date} onChange={handleChange} required />
+      <input type="text" name="origin" placeholder="Origen" value={form.origin} onChange={handleChange} required />
+      <input type="text" name="destination" placeholder="Destino" value={form.destination} onChange={handleChange} required />
+      <input type="number" name="amount" placeholder="Importe" value={form.amount} onChange={handleChange} required min="1" step="1" />
 
-      <input
-        type="text"
-        name="origin"
-        placeholder="Origen"
-        value={form.origin}
-        onChange={handleChange}
-        required
-      />
-
-      <input
-        type="text"
-        name="destination"
-        placeholder="Destino"
-        value={form.destination}
-        onChange={handleChange}
-        required
-      />
-
-      <input
-        type="number"
-        name="amount"
-        placeholder="Importe"
-        value={form.amount}
-        onChange={handleChange}
-        required
-      />
-
-      <select
-        name="paymentMethod"
-        value={form.paymentMethod}
-        onChange={handleChange}
-      >
+      <select name="paymentMethod" value={form.paymentMethod} onChange={handleChange}>
         {PAYMENT_METHODS.map((method) => (
-          <option
-            key={method}
-            value={method}
-          >
-            {method}
-          </option>
+          <option key={method} value={method}>{method}</option>
         ))}
       </select>
 
-      <textarea
-        name="notes"
-        placeholder="Notas"
-        value={form.notes}
-        onChange={handleChange}
-      />
+      <textarea name="notes" placeholder="Notas" value={form.notes} onChange={handleChange} />
 
-      <Button type="submit">
-        {trip ? "Actualizar viaje" : "Guardar viaje"}
-      </Button>
+      <Button type="submit">{trip ? "Actualizar viaje" : "Guardar viaje"}</Button>
     </form>
   );
 }
