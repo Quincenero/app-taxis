@@ -1,14 +1,13 @@
 import { useState } from "react";
-
 import { PAYMENT_METHODS } from "../../../constants/paymentMethods";
-
 import styles from "./TripForm.module.css";
 
 
 function TripForm({ onSave }) {
 
+  const today = new Date().toISOString().split("T")[0];
   const [form, setForm] = useState({
-    date: "",
+    date: today,
     origin: "",
     destination: "",
     amount: "",
@@ -18,36 +17,27 @@ function TripForm({ onSave }) {
 
 
   const handleChange = (e) => {
-
     const { name, value } = e.target;
-
     setForm({
       ...form,
-      [name]: value,
+      [name]: name === "amount" ? Number(value) :value,
     });
 
   };
 
-
   const handleSubmit = (e) => {
-
     e.preventDefault();
-
 
     const newTrip = {
       id: Date.now(),
-
       ...form,
-
       amount: Number(form.amount),
     };
 
-
     onSave(newTrip);
 
-
     setForm({
-      date: "",
+      date: "T",
       origin: "",
       destination: "",
       amount: "",

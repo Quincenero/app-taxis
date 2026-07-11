@@ -7,9 +7,10 @@ import styles from "./ExpenseForm.module.css";
 
 
 function ExpenseForm({ onSave }) {
+  const today = new Date().toISOString().split("T")[0];
 
   const [form, setForm] = useState({
-    date: "",
+    date: today,
     category: "Combustible",
     description: "",
     amount: "",
@@ -47,7 +48,7 @@ function ExpenseForm({ onSave }) {
 
 
     setForm({
-      date: "",
+      date: new Date().toISOString().split("T")[0],
       category: "Combustible",
       description: "",
       amount: "",
