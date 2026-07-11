@@ -1,11 +1,14 @@
 import { Car } from "lucide-react";
-
 import styles from "./TripCard.module.css";
 import { formatCurrency } from "../../../utils/formatCurrency";
 import { formatDate } from "../../../utils/formatDate";
+import Button from "../../common/Button/Button";
 
-
-function TripCard({ trip }) {
+function TripCard({ 
+  trip,
+  onEdit,
+  onDelete, 
+}) {
 
   return (
     <article className={styles.card}>
@@ -51,6 +54,19 @@ function TripCard({ trip }) {
           </p>
         )
       }
+
+      <div className={styles.actions}>
+
+        <Button
+          variant="secondary"
+          onClick={() => onEdit(trip)}
+        >
+          ✏️ Editar
+        </Button>
+
+        
+
+      </div>
 
     </article>
   );

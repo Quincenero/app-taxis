@@ -1,10 +1,8 @@
 import { useState } from "react";
-
 import { EXPENSE_CATEGORIES } from "../../../constants/expenseCategories";
 import { PAYMENT_METHODS } from "../../../constants/paymentMethods";
-
 import styles from "./ExpenseForm.module.css";
-
+import Button from "../../common/Button/Button";
 
 function ExpenseForm({ onSave }) {
   const today = new Date().toISOString().split("T")[0];
@@ -138,9 +136,9 @@ function ExpenseForm({ onSave }) {
       </select>
 
 
-      <button type="submit">
+      <Button type="submit">
         Guardar gasto
-      </button>
+      </Button>
 
 
     </form>

@@ -1,63 +1,54 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { PAYMENT_METHODS } from "../../../constants/paymentMethods";
+import Button from "../../common/Button/Button";
 import styles from "./TripForm.module.css";
 
+const createEmptyForm = () => ({
+  date: new Date().toISOString().split("T")[0],
+  origin: "",
+  destination: "",
+  amount: "",
+  paymentMethod: "Efectivo",
+  notes: "",
+});
 
-function TripForm({ onSave }) {
+function TripForm({ onSave, trip }) {
+  const [form, setForm] = useState(trip || createEmptyForm());
 
-  const today = new Date().toISOString().split("T")[0];
-  const [form, setForm] = useState({
-    date: today,
-    origin: "",
-    destination: "",
-    amount: "",
-    paymentMethod: "Efectivo",
-    notes: "",
-  });
-
+  useEffect(() => {
+    setForm(trip || createEmptyForm());
+  }, [trip]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
+
     setForm({
       ...form,
-      [name]: name === "amount" ? Number(value) :value,
+      [name]: name === "amount" ? Math.floor(Number(value)) : value,
     });
-
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    const newTrip = {
-      id: Date.now(),
+    const tripData = {
       ...form,
       amount: Number(form.amount),
     };
 
-    onSave(newTrip);
+    onSave(tripData);
 
-    setForm({
-      date: "T",
-      origin: "",
-      destination: "",
-      amount: "",
-      paymentMethod: "Efectivo",
-      notes: "",
-    });
-
+    setForm(createEmptyForm());
   };
-
 
   return (
     <form
       className={styles.form}
       onSubmit={handleSubmit}
     >
-
       <h2>
-        Nuevo viaje
+        {trip ? "Editar viaje" : "Nuevo viaje"}
       </h2>
-
 
       <input
         type="date"
@@ -66,7 +57,6 @@ function TripForm({ onSave }) {
         onChange={handleChange}
         required
       />
-
 
       <input
         type="text"
@@ -77,7 +67,6 @@ function TripForm({ onSave }) {
         required
       />
 
-
       <input
         type="text"
         name="destination"
@@ -86,7 +75,6 @@ function TripForm({ onSave }) {
         onChange={handleChange}
         required
       />
-
 
       <input
         type="number"
@@ -97,13 +85,11 @@ function TripForm({ onSave }) {
         required
       />
 
-
       <select
         name="paymentMethod"
         value={form.paymentMethod}
         onChange={handleChange}
       >
-
         {PAYMENT_METHODS.map((method) => (
           <option
             key={method}
@@ -112,9 +98,7 @@ function TripForm({ onSave }) {
             {method}
           </option>
         ))}
-
       </select>
-
 
       <textarea
         name="notes"
@@ -123,15 +107,11 @@ function TripForm({ onSave }) {
         onChange={handleChange}
       />
 
-
-      <button type="submit">
-        Guardar viaje
-      </button>
-
-
+      <Button type="submit">
+        {trip ? "Actualizar viaje" : "Guardar viaje"}
+      </Button>
     </form>
   );
 }
-
 
 export default TripForm;

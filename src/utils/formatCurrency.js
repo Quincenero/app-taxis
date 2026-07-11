@@ -1,12 +1,9 @@
 export function formatCurrency(value) {
-
-  return new Intl.NumberFormat(
-    "es-AR", 
-    {
+  const num = Math.round(Number(value));
+  return new Intl.NumberFormat("es-AR", {
     style: "currency",
     currency: "ARS",
     minimumFractionDigits: 0,
     maximumFractionDigits: 0,
-  }).format(value);
-
+  }).format(num);
 }

@@ -3,7 +3,11 @@ import TripCard from "../TripCard/TripCard";
 import styles from "./TripList.module.css";
 
 
-function TripList({ trips }) {
+function TripList({ 
+  trips,
+  onEdit,
+  onDelete,
+ }) {
 
   return (
     <section className={styles.container}>
@@ -30,6 +34,8 @@ function TripList({ trips }) {
                 <TripCard
                   key={trip.id}
                   trip={trip}
+                  onEdit={onEdit}
+                  onDelete={onDelete}
                 />
 
               ))

@@ -1,3 +1,4 @@
+import { useState } from "react";
 import useLocalStorage from "../../hooks/useLocalStorage";
 import { STORAGE_KEYS } from "../../constants/appConfig";
 import TripForm from "../../components/trips/TripForm/TripForm";
@@ -16,17 +17,46 @@ function Viajes() {
     STORAGE_KEYS.TRIPS
   );
 
+  const [editingTrip, setEditingTrip] = useState(null);
 
-  const handleSave = (newTrip) => {
+  const handleSave = (tripData) => {
 
-    setTrips([
-      ...trips,
-      newTrip,
-    ]);
-    toast.success("🚕 Viaje registrado correctamente");
-    navigate("/")
+      if (editingTrip) {
+
+        setTrips(
+          trips.map((item) =>
+            item.id === editingTrip.id
+              ? {
+                  ...tripData,
+                  id: editingTrip.id,
+                }
+              : item
+          )
+        );
+
+        toast.success("🚕 Viaje actualizado correctamente");
+        setEditingTrip(null);
+
+      } else {
+
+        setTrips([
+          ...trips,
+          {
+            ...tripData,
+            id: Date.now(),
+          },
+        ]);
+
+        toast.success("🚕 Viaje registrado correctamente");
+
+      }
+
+  navigate("/");
+};
+
+  const handleEdit = (trip) => {
+  setEditingTrip(trip);
   };
-
 
   return (
     <section className={styles.container}>
@@ -39,10 +69,12 @@ function Viajes() {
 
       <TripForm
         onSave={handleSave}
+        trip={editingTrip}
       />
 
       <TripList
         trips={trips}
+        onEdit={handleEdit}
       />
 
     </section>
